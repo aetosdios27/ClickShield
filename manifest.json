@@ -1,21 +1,23 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "ClickShield",
   "version": "1.0",
-  "description": "Real-time phishing link scanner using Google Safe Browsing API.",
-  "permissions": ["contextMenus", "activeTab", "scripting", "storage"],
-  "background": { "service_worker": "background.js" },
-  "action": {
+  "permissions": ["activeTab", "http://*/*", "https://*/*"],
+  "browser_action": {
     "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
-    }
+    "default_icon": "icons/icon16.png"
   },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content.js"]
+  }],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "128": "icons/icon48.png"
   }
 }
